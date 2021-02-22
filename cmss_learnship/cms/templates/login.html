@@ -1,0 +1,78 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>CMS</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'libs/bootstrap/dist/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'local/css/login.css' %}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+</head>
+
+<body>
+
+
+
+<div class="bg"></div>
+<div class="bg-cover"></div>
+<header>
+    <a href="http://www.cms.com/">
+    <img src="{% static "local/img/cms.png" %}" alt="MPower" class="logo" id = "optima"/></a>
+</header>
+<div class="content-container">
+
+    <div id="form-container" class="form-container out">
+
+        <div class="title-container">
+            <img src="{% static "local/img/cms.png" %}" alt="CMS" class="logo"/>
+        </div>
+
+        <form id="login-form" action="/login/" method="POST" class="login-form">
+            <div class="form-group">
+                <input type="text" placeholder="Username" name="login_id" style="border-radius: 2px 2px 0px 0px;"
+                       class="form-control">
+            </div>
+
+            <div class="form-group">
+                <input type="password" placeholder="Password" name="password" style="border-radius: 0px 0px 2px 2px;"
+                       class="form-control">
+            </div>
+               {% if msg  %}
+                <div class="alert">
+                   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong>{{ msg }}</strong>
+                </div>
+                {% endif %}
+            <div class="form-group">
+                <button type="submit" class="creative-button cbtn btn-7 btn-7b">Login</button>
+            </div>
+
+            <input type="hidden" name="next" value="/"><input type="hidden" name="csrfmiddlewaretoken"
+                                                              value="AXkykJDtPldNzaOMMVunQiX7WvhSrKeA">
+        </form>
+    </div>
+</div>
+
+<footer>
+    <ul class="nav navbar-nav">
+        <li>
+            <a href="mailto:cms.gmail.com">Contact Us</a>
+        </li>
+
+        <li class="pull-right">
+            <a href="#"></a>
+        </li>
+    </ul>
+</footer>
+
+<script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
+<script type="text/javascript">!(function () {
+      "use strict";
+      var CMS = window.CMS = window.CMS || {};
+      CMS.login_bg = "{% static 'local/img/dumy.jpg' %}";
+      }());
+
+</script>
+<script src="{% static 'local/js/login.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+div.content {
+
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+#graphs {
+
+  div.graphs-row {
+
+    margin-left: -15px;
+
+    div.col-md-6 {
+
+      padding-right: 0;
+      padding-bottom: 0;
+      padding-top: 0;
+
+      div.panel {
+
+        height: 300px;
+        margin-bottom: 15px !important;
+        border: 1px solid #ccc;
+        position: relative;
+
+        div.panel-header {
+
+          padding: 6px 5px;
+          background-color: #eaeaea;
+          border-bottom: 1px solid #ccc;
+          font-weight: bold;
+          border-radius: 3px 3px 0px 0px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 1;
+
+          &> p {
+
+            margin-bottom: 0px;
+            font-size: 1.2em;
+          }
+        }
+
+        div.panel-body {
+
+          padding: 10px;
+          padding-top: 50px;
+          height: 100%;
+
+          div.graph {
+
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}

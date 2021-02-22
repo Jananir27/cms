@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {%  load staticfiles %}
+            <script src='{% static "mat_admin/vendors/bower_components/jquery/dist/jquery.min.js" %}'></script>
+        <script src='{% static "mat_admin/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js" %}'></script>
+    <link href="{% static 'mat_admin/css/cms.css' %}" rel="stylesheet">
+    <script src='{% static 'mat_admin/cms.js' %}'></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+    function presend(jx){
+            $('.content').load(jx);
+        }
+    </script>
+
+
+</head>
+<body>
+<div class="top-bar">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4"><b>Content management system</b></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-6" style="float:right; padding-right:50px;">
+                <img src="{% static "local/img/user.png" %}"/>{{ username }}
+                <a href="/logout/">logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sidebar">
+    {% for k, v in title_list.items %}
+        {% if forloop.counter == 1 %}
+            <a href="#" class="active" onclick="presend('{{ v }}')">{{  k }}</a>
+         {% else %}
+             <a href="#" onclick="presend('{{ v }}')">{{ k }}</a>
+        {%  endif %}
+
+    {% endfor %}
+    <div class="create"><a href="/create/">create</a>
+
+  </div>
+</div>
+
+<div class="content" style="display: block">
+  <h2>Content</h2>
+  <h3>{{ content }}</h3>
+    <h4>Comments</h4>
+    {{ name }}: {{ comments }}
+    <form action="/comments">
+    <label for="fname">First name:</label>
+    <input type="text" id="fname" name="fname" style='width:100%'><br><br>
+        <label for="comment">Comments</label>
+        <textarea id="comments" name="comments" rows="4" cols="50" style='width:100%'></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+</body>
+</html>

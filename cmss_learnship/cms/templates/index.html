@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {%  load staticfiles %}
+            <script src='{% static "mat_admin/vendors/bower_components/jquery/dist/jquery.min.js" %}'></script>
+        <script src='{% static "mat_admin/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js" %}'></script>
+
+    <script type="application/javascript">
+            function alert_mes(message, type, froms, aligns, enters, exits){
+        $.growl({
+            message: message
+        },{
+            type: type,
+            allow_dismiss: false,
+            label: 'Cancel',
+            className: 'btn-xs btn-inverse',
+            placement: {
+                from: froms,
+                align: aligns
+            },
+            delay: 2500,
+            animate: {
+                    enter: enters,
+                    exit: exits
+            },
+            offset: {
+                x: 20,
+                y: 85
+            }
+        });
+    };
+function presend_blog(event) {
+            var title=$('#title').val();
+            var content = $('#content').val();
+            $.ajax({
+                url: '/save/',
+                data: {'title':title, 'content':content},
+                method:"POST",
+                'success': function(response) {
+                    alert(response, 'danger', 'bottom', 'center', 'animated bounceInUp', 'animated bounceOutUp');
+                },
+                 'error': function (xhr, error, thrown) {
+                     alert('Error Occured');
+                 }
+            });
+
+        }
+    </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+div.top-bar {
+    height: 52px;
+    background-color: teal;
+    position: sticky;
+    top: 0;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+</style>
+</head>
+<body>
+<div class="top-bar">
+    <div class="col-md-4"><b>CMS</b></div>
+    <div class="col-md-2"></div>
+     <div class="col-md-6" style="float: right; padding-right:50px;">
+    <img src="{% static "local/img/user.png" %}"/>
+     {{ username }}</div>
+</div>
+<div class="sidebar">
+    {% for k, v in title_list.items %}
+        {% if forloop.counter == 1 %}
+            <a class="active" href="#home">{{  k }}</a>
+         {% else %}
+             <a href="#" onclick="presend('{{ v }}')">{{ k }}</a>
+        {%  endif %}
+
+    {% endfor %}
+    <a href="/home/">Home</a>
+    <div class="create"><a href="#">create</a>
+
+  </div>
+</div>
+
+<div class="content" style="display: block">
+<div class="create_form">
+    <form class="form_create" action="" onsubmit="presend_blog()">
+        <label for="title">Title</label>
+    <input type="text" id="title" name="title" style='width:100%'><br><br>
+        <label for="content">Contents</label>
+        <textarea id="content" name="content" rows="4" cols="50" style='width:100%'></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
+
